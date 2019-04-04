@@ -30,6 +30,15 @@ public class RoverTest {
         assertThat(rover.position()).isEqualTo(Position.of(0, -1));
     }
 
+    @Test
+    void drivesForwardThenBackward() {
+        Rover rover = new Rover();
+        rover.move("f");
+        rover.move("b");
+
+        assertThat(rover.position()).isEqualTo(Position.of(0, 0));
+    }
+
     private class Rover {
 
         private Position position;
@@ -48,10 +57,10 @@ public class RoverTest {
         }
 
         public void move(String direction) {
-            if("f".equals(direction)) {
-                position = Position.of(0, 1);
+            if ("f".equals(direction)) {
+                position = Position.of(0, position.y + 1);
             } else {
-                position = Position.of(0, -1);
+                position = Position.of(0, position.y - 1);
             }
         }
     }
