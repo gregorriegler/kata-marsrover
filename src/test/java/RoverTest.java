@@ -7,14 +7,39 @@ import org.junit.jupiter.api.Test;
 public class RoverTest {
 
     @Test
-    void roverHasPosition() {
+    void hasPositionAndDirection() {
         Rover rover = new Rover();
-        assertThat(rover.position()).isEqualTo(Position.of(0,0));
+        assertThat(rover.position()).isEqualTo(Position.of(0, 0));
+        assertThat(rover.direction()).isEqualTo("N");
     }
 
-    private class Rover{
+    @Test
+    void drivesForward() {
+        Rover rover = new Rover();
+        rover.move("f");
+
+        assertThat(rover.position()).isEqualTo(Position.of(0, 1));
+    }
+
+    private class Rover {
+
+        private Position position;
+
+        public Rover() {
+            this.position = Position.of(0, 0);
+        }
+
         public Position position() {
-            return Position.of(0, 0);
+            return position;
+        }
+
+
+        public String direction() {
+            return "N";
+        }
+
+        public void move(String direction) {
+            position = Position.of(0, 1);
         }
     }
 
