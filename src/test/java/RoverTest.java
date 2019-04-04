@@ -49,12 +49,56 @@ public class RoverTest {
         assertThat(rover.position()).isEqualTo(Position.of(0, 0));
     }
 
+    @Test
+    void turnsLeft() {
+        Rover rover = new Rover();
+        rover.turn("l");
+
+        assertThat(rover.position()).isEqualTo(Position.of(0, 0));
+        assertThat(rover.direction()).isEqualTo("W");
+    }
+
+    @Test
+    void turnsLeftTwice() {
+        Rover rover = new Rover();
+        rover.turn("l");
+        rover.turn("l");
+
+        assertThat(rover.position()).isEqualTo(Position.of(0, 0));
+        assertThat(rover.direction()).isEqualTo("S");
+    }
+
+    @Test
+    void turnsLeftThreeTimes() {
+        Rover rover = new Rover();
+        rover.turn("l");
+        rover.turn("l");
+        rover.turn("l");
+
+        assertThat(rover.position()).isEqualTo(Position.of(0, 0));
+        assertThat(rover.direction()).isEqualTo("E");
+    }
+
+    @Test
+    void turnsLeftFourTimes() {
+        Rover rover = new Rover();
+        rover.turn("l");
+        rover.turn("l");
+        rover.turn("l");
+        rover.turn("l");
+
+        assertThat(rover.position()).isEqualTo(Position.of(0, 0));
+        assertThat(rover.direction()).isEqualTo("N");
+    }
+
     private class Rover {
 
         private Position position;
+        private String direction;
 
         public Rover() {
             this.position = Position.of(0, 0);
+            this.direction = "N";
         }
 
         public Position position() {
@@ -63,14 +107,26 @@ public class RoverTest {
 
 
         public String direction() {
-            return "N";
+            return direction;
         }
 
-        public void move(String direction) {
-            if ("f".equals(direction)) {
+        public void move(String move) {
+            if ("f".equals(move)) {
                 position = Position.of(0, position.y + 1);
             } else {
                 position = Position.of(0, position.y - 1);
+            }
+        }
+
+        public void turn(String turn) {
+            if ("N".equals(direction)) {
+                direction = "W";
+            } else if ("W".equals(direction)) {
+                direction = "S";
+            } else if ("S".equals(direction)) {
+                direction = "E";
+            } else {
+                direction = "N";
             }
         }
     }
