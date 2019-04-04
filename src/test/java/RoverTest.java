@@ -23,6 +23,16 @@ public class RoverTest {
     }
 
     @Test
+    void drivesForwardThreeTimes() {
+        Rover rover = new Rover();
+        rover.move("f");
+        rover.move("f");
+        rover.move("f");
+
+        assertThat(rover.position()).isEqualTo(Position.of(0, 3));
+    }
+
+    @Test
     void drivesBackwards() {
         Rover rover = new Rover();
         rover.move("b");
