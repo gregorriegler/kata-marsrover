@@ -6,8 +6,9 @@ public class Rover {
     public static final String W = "W";
     public static final String S = "S";
     public static final String E = "E";
-    public static final String TURN_L = "l";
     public static final String MOVE_F = "f";
+    public static final String TURN_L = "l";
+    public static final String TURN_R = "r";
 
     private Position position;
     private String direction;
@@ -36,20 +37,28 @@ public class Rover {
 
     public void turn(String turn) {
         if (N.equals(direction)) {
-            if (TURN_L.equals(turn)) {
-                direction = W;
-            } else {
+            if (TURN_R.equals(turn)) {
                 direction = E;
+            } else if (TURN_L.equals(turn)) {
+                direction = W;
             }
         } else if (W.equals(direction)) {
-            direction = S;
-        } else if (S.equals(direction)) {
-            direction = E;
-        } else {
-            if (TURN_L.equals(turn)) {
+            if (TURN_R.equals(turn)) {
                 direction = N;
-            } else {
+            } else if (TURN_L.equals(turn)) {
                 direction = S;
+            }
+        } else if (S.equals(direction)) {
+            if (TURN_R.equals(turn)) {
+                direction = W;
+            } else if (TURN_L.equals(turn)) {
+                direction = E;
+            }
+        } else {
+            if (TURN_R.equals(turn)) {
+                direction = S;
+            } else if (TURN_L.equals(turn)) {
+                direction = N;
             }
         }
     }

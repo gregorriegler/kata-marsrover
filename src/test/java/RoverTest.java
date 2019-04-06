@@ -1,6 +1,6 @@
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoverTest {
 
@@ -106,6 +106,17 @@ public class RoverTest {
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
         assertThat(rover.direction()).isEqualTo("S");
+    }
+
+    @Test
+    void turnsRightThreeTimes() {
+        Rover rover = new Rover();
+        rover.turn("r");
+        rover.turn("r");
+        rover.turn("r");
+
+        assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
+        assertThat(rover.direction()).isEqualTo("W");
     }
 
 }
