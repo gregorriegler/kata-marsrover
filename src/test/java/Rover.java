@@ -2,20 +2,16 @@ import java.util.Objects;
 
 public class Rover {
 
-    public static final String N = "N";
-    public static final String W = "W";
-    public static final String S = "S";
-    public static final String E = "E";
     public static final String MOVE_F = "f";
     public static final String TURN_L = "l";
     public static final String TURN_R = "r";
 
     private Position position;
-    private String direction;
+    private Direction direction;
 
     public Rover() {
         this.position = Position.of(0, 0);
-        this.direction = N;
+        this.direction = Direction.N;
     }
 
     public Position position() {
@@ -23,7 +19,7 @@ public class Rover {
     }
 
 
-    public String direction() {
+    public Direction direction() {
         return direction;
     }
 
@@ -36,29 +32,29 @@ public class Rover {
     }
 
     public void turn(String turn) {
-        if (N.equals(direction)) {
+        if (Direction.N.equals(direction)) {
             if (TURN_R.equals(turn)) {
-                direction = E;
+                direction = Direction.E;
             } else if (TURN_L.equals(turn)) {
-                direction = W;
+                direction = Direction.W;
             }
-        } else if (W.equals(direction)) {
+        } else if (Direction.W.equals(direction)) {
             if (TURN_R.equals(turn)) {
-                direction = N;
+                direction = Direction.N;
             } else if (TURN_L.equals(turn)) {
-                direction = S;
+                direction = Direction.S;
             }
-        } else if (S.equals(direction)) {
+        } else if (Direction.S.equals(direction)) {
             if (TURN_R.equals(turn)) {
-                direction = W;
+                direction = Direction.W;
             } else if (TURN_L.equals(turn)) {
-                direction = E;
+                direction = Direction.E;
             }
         } else {
             if (TURN_R.equals(turn)) {
-                direction = S;
+                direction = Direction.S;
             } else if (TURN_L.equals(turn)) {
-                direction = N;
+                direction = Direction.N;
             }
         }
     }
@@ -96,6 +92,14 @@ public class Rover {
 
         public Position backward() {
             return of(0, y - 1);
+        }
+    }
+
+    public enum Direction {
+        N, W, S, E;
+
+
+        Direction() {
         }
     }
 }

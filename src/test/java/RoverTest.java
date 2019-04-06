@@ -9,7 +9,7 @@ public class RoverTest {
         Rover rover = new Rover();
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
-        assertThat(rover.direction()).isEqualTo("N");
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.N);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class RoverTest {
         rover.turn("l");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
-        assertThat(rover.direction()).isEqualTo("W");
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.W);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class RoverTest {
         rover.turn("l");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
-        assertThat(rover.direction()).isEqualTo("S");
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.S);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class RoverTest {
         rover.turn("l");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
-        assertThat(rover.direction()).isEqualTo("E");
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.E);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class RoverTest {
         rover.turn("l");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
-        assertThat(rover.direction()).isEqualTo("N");
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.N);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class RoverTest {
         rover.turn("r");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
-        assertThat(rover.direction()).isEqualTo("E");
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.E);
     }
 
     @Test
@@ -105,7 +105,7 @@ public class RoverTest {
         rover.turn("r");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
-        assertThat(rover.direction()).isEqualTo("S");
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.S);
     }
 
     @Test
@@ -116,7 +116,19 @@ public class RoverTest {
         rover.turn("r");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
-        assertThat(rover.direction()).isEqualTo("W");
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.W);
+    }
+
+    @Test
+    void turnsRightFourTimes() {
+        Rover rover = new Rover();
+        rover.turn("r");
+        rover.turn("r");
+        rover.turn("r");
+        rover.turn("r");
+
+        assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.N);
     }
 
 }
