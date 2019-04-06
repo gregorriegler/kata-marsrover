@@ -3,8 +3,6 @@ import java.util.Objects;
 public class Rover {
 
     public static final String MOVE_F = "f";
-    public static final String TURN_L = "l";
-    public static final String TURN_R = "r";
 
     private Position position;
     private Direction direction;
@@ -17,7 +15,6 @@ public class Rover {
     public Position position() {
         return position;
     }
-
 
     public Direction direction() {
         return direction;
@@ -32,31 +29,7 @@ public class Rover {
     }
 
     public void turn(String turn) {
-        if (Direction.N.equals(direction)) {
-            if (TURN_R.equals(turn)) {
-                direction = Direction.E;
-            } else if (TURN_L.equals(turn)) {
-                direction = Direction.W;
-            }
-        } else if (Direction.W.equals(direction)) {
-            if (TURN_R.equals(turn)) {
-                direction = Direction.N;
-            } else if (TURN_L.equals(turn)) {
-                direction = Direction.S;
-            }
-        } else if (Direction.S.equals(direction)) {
-            if (TURN_R.equals(turn)) {
-                direction = Direction.W;
-            } else if (TURN_L.equals(turn)) {
-                direction = Direction.E;
-            }
-        } else {
-            if (TURN_R.equals(turn)) {
-                direction = Direction.S;
-            } else if (TURN_L.equals(turn)) {
-                direction = Direction.N;
-            }
-        }
+        this.direction = direction.turn(turn);
     }
 
     public static class Position {
@@ -98,8 +71,29 @@ public class Rover {
     public enum Direction {
         N, W, S, E;
 
-
-        Direction() {
+        static {
+            N.rightOf = E;
+            N.leftOf = W;
+            W.rightOf = N;
+            W.leftOf = S;
+            S.rightOf = W;
+            S.leftOf = E;
+            E.rightOf = S;
+            E.leftOf = N;
         }
+
+        private Direction rightOf;
+        private Direction leftOf;
+
+        public static final String TURN_R = "r";
+
+        private Direction turn(String turn) {
+            if (TURN_R.equals(turn)) {
+                return this.rightOf;
+            } else {
+                return this.leftOf;
+            }
+        }
+
     }
 }
