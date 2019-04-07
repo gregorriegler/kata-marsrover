@@ -20,11 +20,11 @@ public class Rover {
         return direction;
     }
 
-    private void move(String move) {
+    private void move(Character move) {
         this.position = Move.of(move).move(this.position, this.direction);
     }
 
-    private void turn(String turn) {
+    private void turn(Character turn) {
         this.direction = direction.turn(turn);
     }
 
@@ -33,9 +33,9 @@ public class Rover {
         for (char cmd : cmds) {
             List<Character> move = Arrays.asList('f', 'b');
             if(move.contains(cmd)) {
-                move(String.valueOf(cmd));
+                move(cmd);
             } else {
-                turn(String.valueOf(cmd));
+                turn(cmd);
             }
         }
     }
@@ -99,14 +99,14 @@ public class Rover {
         private Direction rightOf;
         private Direction leftOf;
 
-        public static final String TURN_R = "r";
+        public static final Character TURN_R = 'r';
 
         Direction(int vectorX, int vectorY) {
             this.vectorX = vectorX;
             this.vectorY = vectorY;
         }
 
-        private Direction turn(String turn) {
+        private Direction turn(Character turn) {
             if (TURN_R.equals(turn)) {
                 return this.rightOf;
             } else {
@@ -117,20 +117,20 @@ public class Rover {
     }
 
     public enum Move {
-        FORWARD("f", 1),
-        BACKWARD("b", -1);
+        FORWARD('f', 1),
+        BACKWARD('b', -1);
 
-        private final String asString;
+        private final Character asCharacter;
         private final int vector;
 
-        Move(String asString, int vector) {
-            this.asString = asString;
+        Move(Character asCharacter, int vector) {
+            this.asCharacter = asCharacter;
             this.vector = vector;
         }
 
-        public static Move of(String value) {
+        public static Move of(Character value) {
             Move move = Arrays.stream(Move.values())
-                .filter(m -> m.asString.equals(value))
+                .filter(m -> m.asCharacter.equals(value))
                 .findFirst()
                 .orElse(FORWARD);
             return move;
