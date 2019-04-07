@@ -152,7 +152,6 @@ public class Rover {
                 return this.leftOf;
             }
         }
-
     }
 
     public enum Move {
@@ -185,6 +184,5 @@ public class Rover {
                 this.vector * direction.vectorY
             );
         }
-
     }
 }
