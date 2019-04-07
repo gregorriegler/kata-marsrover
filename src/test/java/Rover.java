@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class Rover {
@@ -28,14 +27,12 @@ public class Rover {
         this.direction = direction.turn(turn);
     }
 
-    public void go(String commandString) {
-        char[] cmds = commandString.toCharArray();
-        for (char cmd : cmds) {
-            List<Character> move = Arrays.asList('f', 'b');
-            if(move.contains(cmd)) {
-                move(cmd);
+    public void go(String commands) {
+        for (char command : commands.toCharArray()) {
+            if(Move.is(command)) {
+                move(command);
             } else {
-                turn(cmd);
+                turn(command);
             }
         }
     }
@@ -134,6 +131,10 @@ public class Rover {
                 .findFirst()
                 .orElse(FORWARD);
             return move;
+        }
+
+        public static boolean is(char command) {
+            return Arrays.stream(Move.values()).anyMatch(m -> m.asCharacter.equals(command));
         }
 
         private Position move(Position position, Direction direction) {
