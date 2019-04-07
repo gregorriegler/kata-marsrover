@@ -7,8 +7,16 @@ public class Rover {
     private Direction direction;
 
     public Rover() {
-        this.position = Position.of(0, 0);
-        this.direction = Direction.N;
+        this(Position.of(0, 0), Direction.N);
+    }
+
+    public Rover(Position.World world) {
+        this(Position.of(world, 0, 0), Direction.N);
+    }
+
+    public Rover(Position position, Direction direction) {
+        this.position = position;
+        this.direction = direction;
     }
 
     public Position position() {
@@ -29,7 +37,7 @@ public class Rover {
 
     public void go(String commands) {
         for (char command : commands.toCharArray()) {
-            if(Move.is(command)) {
+            if (Move.is(command)) {
                 move(command);
             } else {
                 turn(command);
@@ -38,20 +46,31 @@ public class Rover {
     }
 
     public static class Position {
+
+        private final World world;
         private final int x;
         private final int y;
 
-        private Position(int x, int y) {
+        private Position(World world, int x, int y) {
+            this.world = world;
             this.x = x;
             this.y = y;
         }
 
         public static Position of(int x, int y) {
-            return new Position(x, y);
+            return new Position(new World(10), x, y);
+        }
+
+        public static Position of(World world, int x, int y) {
+            return new Position(world, x, y);
         }
 
         public Position add(int x, int y) {
-            return of(this.x + x, this.y + y);
+            return of(
+                this.world,
+                world.add(this.x, x),
+                world.add(this.y, y)
+            );
         }
 
         @Override
@@ -71,6 +90,29 @@ public class Rover {
         @Override
         public String toString() {
             return "(" + x + "," + y + ")";
+        }
+
+        public static class World {
+            private final int radius;
+
+            public World(int radius) {
+                this.radius = radius;
+            }
+
+            public int add(int pos, int vector) {
+                int result = pos + vector;
+                if (result > radius) {
+                    return radius - result;
+                } else if (result < invertedRadius()) {
+                    return invertedRadius() - result;
+                } else {
+                    return result;
+                }
+            }
+
+            private int invertedRadius() {
+                return radius * -1;
+            }
         }
     }
 

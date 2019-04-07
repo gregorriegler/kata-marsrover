@@ -169,4 +169,31 @@ public class RoverTest {
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, +1));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.S);
     }
+
+    @Test
+    void moveAcrossTopEdgeOfWorld() {
+        Rover rover = new Rover(new Rover.Position.World(2));
+        rover.go("fff");
+
+        assertThat(rover.position()).isEqualTo(Rover.Position.of(0, -1));
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.N);
+    }
+
+    @Test
+    void moveAcrossBottomEdgeOfWorld() {
+        Rover rover = new Rover(new Rover.Position.World(2));
+        rover.go("llfff");
+
+        assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 1));
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.S);
+    }
+
+    @Test
+    void moveAcrossLeftEdgeOfWorldBackwards() {
+        Rover rover = new Rover(new Rover.Position.World(2));
+        rover.go("rbbbb");
+
+        assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.E);
+    }
 }
