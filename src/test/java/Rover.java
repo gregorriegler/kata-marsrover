@@ -1,8 +1,7 @@
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Rover {
-
-    public static final String MOVE_F = "f";
 
     private Position position;
     private Direction direction;
@@ -21,11 +20,7 @@ public class Rover {
     }
 
     public void move(String move) {
-        if (MOVE_F.equals(move)) {
-            position = position.forward();
-        } else {
-            position = position.backward();
-        }
+        this.position = Move.of(move).move(this.direction, this.position);
     }
 
     public void turn(String turn) {
@@ -59,13 +54,14 @@ public class Rover {
             return Objects.hash(x, y);
         }
 
-        public Position forward() {
-            return of(0, y + 1);
+        private Position goHorizontal(int step) {
+            return of(x + step, y);
         }
 
-        public Position backward() {
-            return of(0, y - 1);
+        private Position goVertical(int step) {
+            return of(x, y + step);
         }
+
     }
 
     public enum Direction {
@@ -95,5 +91,34 @@ public class Rover {
             }
         }
 
+    }
+
+    public enum Move {
+        FORWARD("f", 1),
+        BACKWARD("b", -1);
+
+        private final String asString;
+        private final int step;
+
+        Move(String asString, int step) {
+            this.asString = asString;
+            this.step = step;
+        }
+
+        public static Move of(String value) {
+            Move move = Arrays.stream(Move.values())
+                .filter(m -> m.asString.equals(value))
+                .findFirst()
+                .orElse(FORWARD);
+            return move;
+        }
+
+        private Position move(Direction direction, Position position) {
+            if(Direction.W.equals(direction)) {
+                return position.goHorizontal(step * -1);
+            } else {
+                return position.goVertical(step * 1);
+            }
+        }
     }
 }

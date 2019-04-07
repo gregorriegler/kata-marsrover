@@ -131,4 +131,14 @@ public class RoverTest {
         assertThat(rover.direction()).isEqualTo(Rover.Direction.N);
     }
 
+    @Test
+    void turnLeftThenForward() {
+        Rover rover = new Rover();
+        rover.turn("l");
+        rover.move("f");
+
+        assertThat(rover.position()).isEqualTo(Rover.Position.of(-1, 0));
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.W);
+    }
+
 }
