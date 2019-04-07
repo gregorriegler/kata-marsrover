@@ -15,7 +15,7 @@ public class RoverTest {
     @Test
     void drivesForward() {
         Rover rover = new Rover();
-        rover.move("f");
+        rover.go("f");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 1));
     }
@@ -23,9 +23,7 @@ public class RoverTest {
     @Test
     void drivesForwardThreeTimes() {
         Rover rover = new Rover();
-        rover.move("f");
-        rover.move("f");
-        rover.move("f");
+        rover.go("fff");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 3));
     }
@@ -33,7 +31,7 @@ public class RoverTest {
     @Test
     void drivesBackwards() {
         Rover rover = new Rover();
-        rover.move("b");
+        rover.go("b");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, -1));
     }
@@ -41,8 +39,7 @@ public class RoverTest {
     @Test
     void drivesForwardThenBackward() {
         Rover rover = new Rover();
-        rover.move("f");
-        rover.move("b");
+        rover.go("fb");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
     }
@@ -50,7 +47,7 @@ public class RoverTest {
     @Test
     void turnsLeft() {
         Rover rover = new Rover();
-        rover.turn("l");
+        rover.go("l");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.W);
@@ -59,8 +56,7 @@ public class RoverTest {
     @Test
     void turnsLeftTwice() {
         Rover rover = new Rover();
-        rover.turn("l");
-        rover.turn("l");
+        rover.go("ll");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.S);
@@ -69,9 +65,7 @@ public class RoverTest {
     @Test
     void turnsLeftThreeTimes() {
         Rover rover = new Rover();
-        rover.turn("l");
-        rover.turn("l");
-        rover.turn("l");
+        rover.go("lll");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.E);
@@ -80,10 +74,7 @@ public class RoverTest {
     @Test
     void turnsLeftFourTimes() {
         Rover rover = new Rover();
-        rover.turn("l");
-        rover.turn("l");
-        rover.turn("l");
-        rover.turn("l");
+        rover.go("llll");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.N);
@@ -92,7 +83,7 @@ public class RoverTest {
     @Test
     void turnsRight() {
         Rover rover = new Rover();
-        rover.turn("r");
+        rover.go("r");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.E);
@@ -101,8 +92,7 @@ public class RoverTest {
     @Test
     void turnsRightTwice() {
         Rover rover = new Rover();
-        rover.turn("r");
-        rover.turn("r");
+        rover.go("rr");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.S);
@@ -111,9 +101,7 @@ public class RoverTest {
     @Test
     void turnsRightThreeTimes() {
         Rover rover = new Rover();
-        rover.turn("r");
-        rover.turn("r");
-        rover.turn("r");
+        rover.go("rrr");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.W);
@@ -122,10 +110,7 @@ public class RoverTest {
     @Test
     void turnsRightFourTimes() {
         Rover rover = new Rover();
-        rover.turn("r");
-        rover.turn("r");
-        rover.turn("r");
-        rover.turn("r");
+        rover.go("rrrr");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.N);
@@ -134,8 +119,7 @@ public class RoverTest {
     @Test
     void turnLeftThenForward() {
         Rover rover = new Rover();
-        rover.turn("l");
-        rover.move("f");
+        rover.go("lf");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(-1, 0));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.W);
@@ -144,8 +128,7 @@ public class RoverTest {
     @Test
     void turnLeftThenBackward() {
         Rover rover = new Rover();
-        rover.turn("l");
-        rover.move("b");
+        rover.go("lb");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(1, 0));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.W);
@@ -154,8 +137,7 @@ public class RoverTest {
     @Test
     void turnRightThenForward() {
         Rover rover = new Rover();
-        rover.turn("r");
-        rover.move("f");
+        rover.go("rf");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(+1, 0));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.E);
@@ -164,8 +146,7 @@ public class RoverTest {
     @Test
     void turnRightThenBackward() {
         Rover rover = new Rover();
-        rover.turn("r");
-        rover.move("b");
+        rover.go("rb");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(-1, 0));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.E);
@@ -174,9 +155,7 @@ public class RoverTest {
     @Test
     void turnRightTwoTimesThenForward() {
         Rover rover = new Rover();
-        rover.turn("r");
-        rover.turn("r");
-        rover.move("f");
+        rover.go("rrf");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, -1));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.S);
@@ -185,12 +164,9 @@ public class RoverTest {
     @Test
     void turnRightTwoTimesThenBackward() {
         Rover rover = new Rover();
-        rover.turn("r");
-        rover.turn("r");
-        rover.move("b");
+        rover.go("rrb");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, +1));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.S);
     }
-
 }
