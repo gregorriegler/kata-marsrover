@@ -40,12 +40,8 @@ public class Rover {
             return new Position(x, y);
         }
 
-        public Position addToX(int newX) {
-            return of(x + newX, y);
-        }
-
-        public Position addToY(int newY) {
-            return of(x, y + newY);
+        public Position add(int newX, int newY) {
+            return of(x + newX, y + newY);
         }
 
         @Override
@@ -69,7 +65,10 @@ public class Rover {
     }
 
     public enum Direction {
-        N(1), W(-1), S(-1), E(+1);
+        N(0, 1),
+        W(-1, 0),
+        S(0, -1),
+        E(1, 0);
 
         static {
             N.rightOf = E;
@@ -82,14 +81,16 @@ public class Rover {
             E.leftOf = N;
         }
 
-        private final int vector;
+        private final int vectorX;
+        private final int vectorY;
         private Direction rightOf;
         private Direction leftOf;
 
         public static final String TURN_R = "r";
 
-        Direction(int vector) {
-            this.vector = vector;
+        Direction(int vectorX, int vectorY) {
+            this.vectorX = vectorX;
+            this.vectorY = vectorY;
         }
 
         private Direction turn(String turn) {
@@ -123,12 +124,10 @@ public class Rover {
         }
 
         private Position move(Position position, Direction direction) {
-            int vector = this.vector * direction.vector;
-            if (Direction.W.equals(direction) || Direction.E.equals(direction)) {
-                return position.addToX(vector);
-            } else {
-                return position.addToY(vector);
-            }
+            return position.add(
+                this.vector * direction.vectorX,
+                this.vector * direction.vectorY
+            );
         }
 
     }
