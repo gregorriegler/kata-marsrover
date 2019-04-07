@@ -40,8 +40,8 @@ public class Rover {
             return new Position(x, y);
         }
 
-        public Position add(int newX, int newY) {
-            return of(x + newX, y + newY);
+        public Position add(int x, int y) {
+            return of(this.x + x, this.y + y);
         }
 
         @Override
