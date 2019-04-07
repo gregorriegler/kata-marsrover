@@ -40,6 +40,14 @@ public class Rover {
             return new Position(x, y);
         }
 
+        private Position goHorizontal(int step) {
+            return of(x + step, y);
+        }
+
+        private Position goVertical(int step) {
+            return of(x, y + step);
+        }
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -54,14 +62,10 @@ public class Rover {
             return Objects.hash(x, y);
         }
 
-        private Position goHorizontal(int step) {
-            return of(x + step, y);
+        @Override
+        public String toString() {
+            return "(" + x + "," + y + ")";
         }
-
-        private Position goVertical(int step) {
-            return of(x, y + step);
-        }
-
     }
 
     public enum Direction {
@@ -116,6 +120,10 @@ public class Rover {
         private Position move(Direction direction, Position position) {
             if(Direction.W.equals(direction)) {
                 return position.goHorizontal(step * -1);
+            } else if (Direction.E.equals(direction)) {
+                return position.goHorizontal(step * 1);
+            } else if (Direction.S.equals(direction)) {
+                return position.goVertical(step * -1);
             } else {
                 return position.goVertical(step * 1);
             }

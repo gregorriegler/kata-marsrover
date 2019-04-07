@@ -141,4 +141,56 @@ public class RoverTest {
         assertThat(rover.direction()).isEqualTo(Rover.Direction.W);
     }
 
+    @Test
+    void turnLeftThenBackward() {
+        Rover rover = new Rover();
+        rover.turn("l");
+        rover.move("b");
+
+        assertThat(rover.position()).isEqualTo(Rover.Position.of(1, 0));
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.W);
+    }
+
+    @Test
+    void turnRightThenForward() {
+        Rover rover = new Rover();
+        rover.turn("r");
+        rover.move("f");
+
+        assertThat(rover.position()).isEqualTo(Rover.Position.of(+1, 0));
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.E);
+    }
+
+    @Test
+    void turnRightThenBackward() {
+        Rover rover = new Rover();
+        rover.turn("r");
+        rover.move("b");
+
+        assertThat(rover.position()).isEqualTo(Rover.Position.of(-1, 0));
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.E);
+    }
+
+    @Test
+    void turnRightTwoTimesThenForward() {
+        Rover rover = new Rover();
+        rover.turn("r");
+        rover.turn("r");
+        rover.move("f");
+
+        assertThat(rover.position()).isEqualTo(Rover.Position.of(0, -1));
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.S);
+    }
+
+    @Test
+    void turnRightTwoTimesThenBackward() {
+        Rover rover = new Rover();
+        rover.turn("r");
+        rover.turn("r");
+        rover.move("b");
+
+        assertThat(rover.position()).isEqualTo(Rover.Position.of(0, +1));
+        assertThat(rover.direction()).isEqualTo(Rover.Direction.S);
+    }
+
 }
