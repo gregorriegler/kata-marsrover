@@ -23,6 +23,7 @@ public class RoverTest {
     @Test
     void drivesForward() {
         Rover rover = new Rover();
+
         rover.go("f");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 1));
@@ -31,6 +32,7 @@ public class RoverTest {
     @Test
     void drivesForwardThreeTimes() {
         Rover rover = new Rover();
+
         rover.go("fff");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 3));
@@ -39,6 +41,7 @@ public class RoverTest {
     @Test
     void drivesBackwards() {
         Rover rover = new Rover();
+
         rover.go("b");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, -1));
@@ -47,6 +50,7 @@ public class RoverTest {
     @Test
     void drivesForwardThenBackward() {
         Rover rover = new Rover();
+
         rover.go("fb");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
@@ -55,6 +59,7 @@ public class RoverTest {
     @Test
     void turnsLeft() {
         Rover rover = new Rover();
+
         rover.go("l");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
@@ -64,6 +69,7 @@ public class RoverTest {
     @Test
     void turnsLeftTwice() {
         Rover rover = new Rover();
+
         rover.go("ll");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
@@ -73,6 +79,7 @@ public class RoverTest {
     @Test
     void turnsLeftThreeTimes() {
         Rover rover = new Rover();
+
         rover.go("lll");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
@@ -82,6 +89,7 @@ public class RoverTest {
     @Test
     void turnsLeftFourTimes() {
         Rover rover = new Rover();
+
         rover.go("llll");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
@@ -91,6 +99,7 @@ public class RoverTest {
     @Test
     void turnsRight() {
         Rover rover = new Rover();
+
         rover.go("r");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
@@ -100,6 +109,7 @@ public class RoverTest {
     @Test
     void turnsRightTwice() {
         Rover rover = new Rover();
+
         rover.go("rr");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
@@ -109,6 +119,7 @@ public class RoverTest {
     @Test
     void turnsRightThreeTimes() {
         Rover rover = new Rover();
+
         rover.go("rrr");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
@@ -118,6 +129,7 @@ public class RoverTest {
     @Test
     void turnsRightFourTimes() {
         Rover rover = new Rover();
+
         rover.go("rrrr");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
@@ -127,6 +139,7 @@ public class RoverTest {
     @Test
     void turnLeftThenForward() {
         Rover rover = new Rover();
+
         rover.go("lf");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(-1, 0));
@@ -136,6 +149,7 @@ public class RoverTest {
     @Test
     void turnLeftThenBackward() {
         Rover rover = new Rover();
+
         rover.go("lb");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(1, 0));
@@ -145,6 +159,7 @@ public class RoverTest {
     @Test
     void turnRightThenForward() {
         Rover rover = new Rover();
+
         rover.go("rf");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(+1, 0));
@@ -154,6 +169,7 @@ public class RoverTest {
     @Test
     void turnRightThenBackward() {
         Rover rover = new Rover();
+
         rover.go("rb");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(-1, 0));
@@ -163,6 +179,7 @@ public class RoverTest {
     @Test
     void turnRightTwoTimesThenForward() {
         Rover rover = new Rover();
+
         rover.go("rrf");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, -1));
@@ -172,6 +189,7 @@ public class RoverTest {
     @Test
     void turnRightTwoTimesThenBackward() {
         Rover rover = new Rover();
+
         rover.go("rrb");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, +1));
@@ -181,6 +199,7 @@ public class RoverTest {
     @Test
     void moveAcrossTopEdgeOfWorld() {
         Rover rover = new Rover(new Rover.Position.World(2));
+
         rover.go("fff");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, -1));
@@ -190,6 +209,7 @@ public class RoverTest {
     @Test
     void moveAcrossBottomEdgeOfWorld() {
         Rover rover = new Rover(new Rover.Position.World(2));
+
         rover.go("llfff");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 1));
@@ -199,6 +219,7 @@ public class RoverTest {
     @Test
     void moveAcrossLeftEdgeOfWorldBackwards() {
         Rover rover = new Rover(new Rover.Position.World(2));
+
         rover.go("rbbbb");
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
