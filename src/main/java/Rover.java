@@ -31,10 +31,16 @@ public class Rover {
         for (char command : commands.toCharArray()) {
             if (Move.is(command)) {
                 move(command);
-            } else {
+            } else if (isTurn(command)) {
                 turn(command);
+            } else {
+                throw new IllegalArgumentException("Unknown command.");
             }
         }
+    }
+
+    private boolean isTurn(char command) {
+        return "lr".indexOf(command) >= 0;
     }
 
     private void move(Character move) {

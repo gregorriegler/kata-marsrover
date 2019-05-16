@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class RoverTest {
 
@@ -10,6 +11,13 @@ public class RoverTest {
 
         assertThat(rover.position()).isEqualTo(Rover.Position.of(0, 0));
         assertThat(rover.direction()).isEqualTo(Rover.Direction.N);
+    }
+
+    @Test
+    void uknownCommand() {
+        Rover rover = new Rover();
+
+        assertThatThrownBy(() -> rover.go("x")).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
