@@ -27,14 +27,6 @@ public class Rover {
         return direction;
     }
 
-    private void move(Character move) {
-        this.position = Move.of(move).move(this.position, this.direction);
-    }
-
-    private void turn(Character turn) {
-        this.direction = direction.turn(turn);
-    }
-
     public void go(String commands) {
         for (char command : commands.toCharArray()) {
             if (Move.is(command)) {
@@ -43,6 +35,14 @@ public class Rover {
                 turn(command);
             }
         }
+    }
+
+    private void move(Character move) {
+        this.position = Move.of(move).move(this.position, this.direction);
+    }
+
+    private void turn(Character turn) {
+        this.direction = direction.turn(turn);
     }
 
     public static class Position {
