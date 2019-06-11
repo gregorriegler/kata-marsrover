@@ -12,7 +12,7 @@ public class RoverTest {
     @BeforeEach
     void setUp() {
         rover = new Rover();
-        roverOnEdge = new Rover(new Rover.Position.World(2));
+        roverOnEdge = new Rover(new World(2));
     }
 
     @Test

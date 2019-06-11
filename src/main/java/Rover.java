@@ -10,7 +10,7 @@ public class Rover {
         this(Position.of(0, 0), Direction.N);
     }
 
-    public Rover(Position.World world) {
+    public Rover(World world) {
         this(Position.of(world, 0, 0), Direction.N);
     }
 
@@ -98,28 +98,6 @@ public class Rover {
             return "(" + x + "," + y + ")";
         }
 
-        public static class World {
-            private final int radius;
-
-            public World(int radius) {
-                this.radius = radius;
-            }
-
-            public int add(int pos, int vector) {
-                int result = pos + vector;
-                if (result > radius) {
-                    return radius - result;
-                } else if (result < invertedRadius()) {
-                    return invertedRadius() - result;
-                } else {
-                    return result;
-                }
-            }
-
-            private int invertedRadius() {
-                return radius * -1;
-            }
-        }
     }
 
     public enum Direction {
@@ -191,4 +169,5 @@ public class Rover {
             );
         }
     }
+
 }
