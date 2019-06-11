@@ -102,25 +102,12 @@ public class Rover {
 
     public enum Direction {
         N(0, 1),
-        W(-1, 0),
+        E(1, 0),
         S(0, -1),
-        E(1, 0);
-
-        static {
-            N.rightOf = E;
-            N.leftOf = W;
-            W.rightOf = N;
-            W.leftOf = S;
-            S.rightOf = W;
-            S.leftOf = E;
-            E.rightOf = S;
-            E.leftOf = N;
-        }
+        W(-1, 0);
 
         private final int vectorX;
         private final int vectorY;
-        private Direction rightOf;
-        private Direction leftOf;
 
         public static final Character TURN_R = 'r';
 
@@ -131,10 +118,26 @@ public class Rover {
 
         private Direction turn(Character turn) {
             if (TURN_R.equals(turn)) {
-                return this.rightOf;
+                return right();
             } else {
-                return this.leftOf;
+                return left();
             }
+        }
+
+        private Direction left() {
+            int left = ordinal() - 1;
+            if (left < 0) {
+                left = values().length - 1;
+            }
+            return Direction.values()[left];
+        }
+
+        private Direction right() {
+            int right = ordinal() + 1;
+            if (right >= values().length) {
+                right = 0;
+            }
+            return Direction.values()[right];
         }
     }
 
